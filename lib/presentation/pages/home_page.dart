@@ -3,7 +3,6 @@ import 'package:clean_arquitecture/core/theme/app_styles.dart';
 import 'package:clean_arquitecture/presentation/cubit/note_cubit.dart';
 import 'package:clean_arquitecture/presentation/pages/add_note_page.dart';
 import 'package:clean_arquitecture/presentation/widgets/display_notes.dart';
-import 'package:clean_arquitecture/presentation/widgets/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
