@@ -5,8 +5,8 @@ import 'local_data/database_helper.dart';
 abstract class NoteLocalDataSource {
   Future<Note> add(Note note);
   Future<List<Note>> fetch();
-  // Future<int?> delete(int noteId);
-  // Future<int?> update(Note note);
+  Future<int?> delete(int noteId);
+  Future<int?> update(Note note);
 }
 
 class NoteLocalDataSourceImpl implements NoteLocalDataSource {
@@ -18,9 +18,9 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
   @override
   Future<List<Note>> fetch() => _databaseHelper.fetch();
 
-  // @override
-  // Future<int?> update(Note note) => _databaseHelper.update(note);
+  @override
+  Future<int?> update(Note note) => _databaseHelper.update(note);
 
-  // @override
-  // Future<int?> delete(int noteId) => _databaseHelper.delete(noteId);
+  @override
+  Future<int?> delete(int noteId) => _databaseHelper.delete(noteId);
 }

@@ -31,4 +31,25 @@ class NoteRepositoryImpl implements NoteRepository {
       return Left(DatabaseFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteNote(int id) async {
+    try {
+      await noteLocalDataSource.delete(id);
+      return const Right(null);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateNote(NoteEntity? note) async {
+    try {
+      final noteToUpdate = Note.fromEntity(note!); //if this breaks, it's because note is null
+      await noteLocalDataSource.update(noteToUpdate);
+      return const Right(null);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    }
+  }
 }

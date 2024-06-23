@@ -17,3 +17,17 @@ class AddNoteUseCase {
   Future<Either<Failure, NoteEntity>> execute(NoteEntity? note) =>
       repository.addNote(note);
 }
+
+class DeleteNoteUseCase {
+  final NoteRepository repository;
+  DeleteNoteUseCase(this.repository);
+  Future<Either<Failure, void>> execute(int id) =>
+      repository.deleteNote(id);
+}
+
+class UpdateNoteUseCase {
+  final NoteRepository repository;
+  UpdateNoteUseCase(this.repository);
+  Future<Either<Failure, void>> execute(NoteEntity? note) =>
+      repository.updateNote(note);
+}

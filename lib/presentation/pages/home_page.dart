@@ -53,16 +53,16 @@ class _HomePageState extends State<HomePage> {
       margin: const EdgeInsets.only(top: 14),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             'Notes',
             style: AppStyles.title.copyWith(fontSize: 32),
           ),
-          MyIconButton(
-            onTap: () {},
-            icon: Icons.search,
-          ),
+          // MyIconButton(
+          //   onTap: () {},
+          //   icon: Icons.search,
+          // ),
         ],
       ),
     );

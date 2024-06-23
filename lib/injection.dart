@@ -11,10 +11,14 @@ Future<void> init() async {
   locator.registerFactory(() => NoteCubit(
         locator<AddNoteUseCase>(),
         locator<FetchNotesUseCase>(),
+        locator<DeleteNoteUseCase>(),
+        locator<UpdateNoteUseCase>(),
       ));
 
   locator.registerLazySingleton(() => FetchNotesUseCase(locator()));
   locator.registerLazySingleton(() => AddNoteUseCase(locator()));
+  locator.registerLazySingleton(() => DeleteNoteUseCase(locator()));
+  locator.registerLazySingleton(() => UpdateNoteUseCase(locator()));
 
   locator.registerLazySingleton<NoteRepository>(
     () => NoteRepositoryImpl(noteLocalDataSource: locator()),

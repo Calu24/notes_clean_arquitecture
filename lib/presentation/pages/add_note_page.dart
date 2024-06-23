@@ -1,6 +1,7 @@
 import 'package:clean_arquitecture/core/theme/app_styles.dart';
 import 'package:clean_arquitecture/domain/entities/note_entity.dart';
 import 'package:clean_arquitecture/presentation/cubit/note_cubit.dart';
+import 'package:clean_arquitecture/presentation/pages/home_page.dart';
 import 'package:clean_arquitecture/presentation/widgets/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,11 @@ class _AddNotePageState extends State<AddNotePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isUpdate) {
+      titleTextController.text = widget.note!.title;
+      noteTextController.text = widget.note!.text;
+    }
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -52,7 +58,7 @@ class _AddNotePageState extends State<AddNotePage> {
       actions: [
         MyIconButton(
           onTap: () => validateInput(),
-          text: 'Save',
+          text: widget.isUpdate ? 'Update' : 'Save',
         ),
       ],
       automaticallyImplyLeading: false, // To hide the back button
@@ -111,8 +117,16 @@ class _AddNotePageState extends State<AddNotePage> {
         noteTextController.text.isNotEmpty;
 
     if (isNotEmpty) {
-      addNoteToDB();
-      Navigator.of(context).pop();
+      if (widget.isUpdate) {
+        updateNoteInDB();
+      } else {
+        addNoteToDB();
+      }
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
     }
   }
 
@@ -131,6 +145,17 @@ class _AddNotePageState extends State<AddNotePage> {
     BlocProvider.of<NoteCubit>(context).addNote(
       NoteEntity(
         id: generateUniqueId(),
+        text: noteTextController.text,
+        title: titleTextController.text,
+        date: currentDate,
+      ),
+    );
+  }
+
+  void updateNoteInDB() {
+    BlocProvider.of<NoteCubit>(context).updateNoteById(
+      NoteEntity(
+        id: widget.note!.id,
         text: noteTextController.text,
         title: titleTextController.text,
         date: currentDate,
