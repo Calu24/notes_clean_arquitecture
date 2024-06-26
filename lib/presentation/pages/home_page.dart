@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     Future.microtask(() => context.read<NoteCubit>().fetchNotes());
   }
-
+//Hola
   @override
   Widget build(BuildContext context) {
     return Scaffold(
