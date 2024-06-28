@@ -1,6 +1,6 @@
+import 'package:clean_arquitecture/core/app_router/app_router.dart';
 import 'package:clean_arquitecture/data/datasource/local_data/database_helper.dart';
 import 'package:clean_arquitecture/presentation/cubit/note_cubit.dart';
-import 'package:clean_arquitecture/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [BlocProvider(create: (_) => di.locator<NoteCubit>())],
-      child: const MaterialApp(
+      child: MaterialApp.router(
         title: 'Flutter Note App',
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        routerConfig: appRouter,
       ),
     );
   }

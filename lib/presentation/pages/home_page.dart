@@ -1,10 +1,11 @@
+import 'package:clean_arquitecture/core/app_router/app_router.dart';
 import 'package:clean_arquitecture/core/theme/app_colors.dart';
 import 'package:clean_arquitecture/core/theme/app_styles.dart';
 import 'package:clean_arquitecture/presentation/cubit/note_cubit.dart';
-import 'package:clean_arquitecture/presentation/pages/add_note_page.dart';
 import 'package:clean_arquitecture/presentation/widgets/display_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,11 +27,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const AddNotePage(note: null),
-            ),
-          );
+          context.push(RoutePath.add.path);
         },
         child: const Icon(Icons.add),
       ),
@@ -58,10 +55,6 @@ class _HomePageState extends State<HomePage> {
             'Notes',
             style: AppStyles.title.copyWith(fontSize: 32),
           ),
-          // MyIconButton(
-          //   onTap: () {},
-          //   icon: Icons.search,
-          // ),
         ],
       ),
     );
@@ -84,11 +77,6 @@ class _HomePageState extends State<HomePage> {
                 child: DisplayNotes(notes: state.notes),
               );
             }
-            // else {
-            //   return const Center(
-            //     child: Text('Unknown state'),
-            //   );
-            // }
           },
         ),
       ),

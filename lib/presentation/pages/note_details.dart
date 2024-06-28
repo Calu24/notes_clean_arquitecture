@@ -1,8 +1,9 @@
+import 'package:clean_arquitecture/core/app_router/app_router.dart';
 import 'package:clean_arquitecture/domain/entities/note_entity.dart';
 import 'package:clean_arquitecture/presentation/cubit/note_cubit.dart';
-import 'package:clean_arquitecture/presentation/pages/add_note_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_styles.dart';
@@ -24,8 +25,7 @@ class NoteDetailPage extends StatelessWidget {
           IconButton(
             onPressed: () {
               context.read<NoteCubit>().deleteNoteById(note.id);
-              // BlocProvider.of<NoteCubit>(context).deleteNoteById(note.id);
-              Navigator.of(context).pop();
+              context.pop();
             },
             icon: const Icon(Icons.delete),
           ),
@@ -34,11 +34,7 @@ class NoteDetailPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => AddNotePage(note: note, isUpdate: true),
-            ),
-          );
+          context.push(RoutePath.add.path, extra: [note, true]);
         },
         child: const Icon(Icons.edit),
       ),

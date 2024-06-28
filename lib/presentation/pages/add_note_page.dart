@@ -1,10 +1,11 @@
+import 'package:clean_arquitecture/core/app_router/app_router.dart';
 import 'package:clean_arquitecture/core/theme/app_styles.dart';
 import 'package:clean_arquitecture/domain/entities/note_entity.dart';
 import 'package:clean_arquitecture/presentation/cubit/note_cubit.dart';
-import 'package:clean_arquitecture/presentation/pages/home_page.dart';
 import 'package:clean_arquitecture/presentation/widgets/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/theme/app_colors.dart';
 
@@ -52,7 +53,7 @@ class _AddNotePageState extends State<AddNotePage> {
     return AppBar(
       backgroundColor: AppColors.background,
       leading: MyIconButton(
-        onTap: () => Navigator.of(context).pop(),
+        onTap: () => context.pop(),
         icon: Icons.keyboard_arrow_left,
       ),
       actions: [
@@ -122,11 +123,7 @@ class _AddNotePageState extends State<AddNotePage> {
       } else {
         addNoteToDB();
       }
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
+      context.pushReplacement(RoutePath.home.path);
     }
   }
 
